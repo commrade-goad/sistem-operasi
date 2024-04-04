@@ -108,7 +108,6 @@ static void Neutral_Task(void* pvParameters) {
 void loop() {}
 ```
 
-the same delay and the same duration
 - Those 2 task may look random when they run but they are controlled under `vTaskDelay` and `xTaskCreate` priority.
 - When `vTaskDelay` args for all of the 3 functions changed to be the same (example below)
 
