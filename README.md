@@ -1,6 +1,8 @@
 # Sistem Operasi Note
 
 ## 1. How do the Task No. x behaves by setting and modifying the Priority if we have : 2024-04-04
+src: [wokwi](https://wokwi.com/projects/394200944712715265)
+
 the same delay and the same duration
 - Those 2 task may look random when they run but they are controlled under `vTaskDelay` and `xTaskCreate` priority.
 - When `vTaskDelay` args for all of the 3 functions changed to be the same (example below)
