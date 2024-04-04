@@ -1,6 +1,6 @@
 # Sistem Operasi Note
 
-## 1. How do the Task No. x behaves by setting and modifying the Priority if we have : 2024-04-04
+## 1. How do the Task No. x behaves by setting and modifying the Priority if we have the same delay and the same duration: 2024-04-04
 src: [wokwi](https://wokwi.com/projects/394200944712715265)
 
 the same delay and the same duration
