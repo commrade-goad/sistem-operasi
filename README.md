@@ -3,6 +3,10 @@
 ## 1. How do the Task No. x behaves by setting and modifying the Priority if we have the same delay and the same duration: 2024-04-04
 src: [wokwi](https://wokwi.com/projects/394200944712715265)
 
+```ino
+
+```
+
 the same delay and the same duration
 - Those 2 task may look random when they run but they are controlled under `vTaskDelay` and `xTaskCreate` priority.
 - When `vTaskDelay` args for all of the 3 functions changed to be the same (example below)
@@ -80,6 +84,7 @@ Task no. 2!
 Task no. 3!
 ```
 
-- From that example we can say that if the `xTaskCreate` priority args set to be bigger then it will have the most priority and get to run first.
-- priority is `uint8_t` with the alias of `UBaseType_t`;
+- From that example we can say that if the `xTaskCreate` priority args set to be bigger then it will have the most priority and get to run first
+- priority is `uint8_t` with the alias of `UBaseType_t`
 - so any unsigned integer 8 bits are possible to be an args for the `xTaskCreate` function.
+- when the priority is `0` it will be an idle task that will be only run when idle (no other work to do).
