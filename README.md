@@ -1,4 +1,4 @@
-# Tugas 1 Sistem Operasi
+# Sistem Operasi Note
 
 ## 1. How do the Task No. x behaves by setting and modifying the Priority if we have : 2024-04-04
 the same delay and the same duration
