@@ -188,3 +188,15 @@ Task no. 3!
 - priority is `uint8_t` with the alias of `UBaseType_t`
 - so any unsigned integer 8 bits are possible to be an args for the `xTaskCreate` function.
 - when the priority is `0` it will be an idle task that will be only run when idle (no other work to do).
+
+## MUTEX
+src: [wokwi](https://wokwi.com/projects/395466103682715649)
+
+- a Mutex is a var that will lock itself when used by thread x and make thread y to wait for thread x to finish its job.
+- type that used for the mutex : `SemaphoreHandle_t`
+- there is 2 func that will be used to lock and unlock the var.
+    * `xSemaphoreTake();`
+    * `xSemaphoreGive();`
+
+- `xSemaphoreTake()` will accept 2 args which is the handler which is the `SemaphoreHandle_t` object and the tick (time to check again).
+- `xSemaphoreGive()` just need 1 arg which is the handler.
