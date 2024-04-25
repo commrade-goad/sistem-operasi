@@ -320,13 +320,13 @@ d value: 5, UpdTted value: 6
 ad value: 6, UpdTted value: 7
 ```
 
-1. The Bounded-Buffer Problem
+1. __The Bounded-Buffer Problem__
     * A bounded buffer lets multiple producers and multiple consumers share a single buffer. Producers write data to the buffer and consumers read data from the buffer.
     * so if there is 4 threads, 2 is reader and the other 2 is writer and when one of the writer is writing to the buffer and the buffer is full this writer thread need to tell the other writer thread that the buffer is full so it didnt get overflowed. With the reader threads perspective when the buffer is empty its better to tell the other reader thread to not bother reading the buffer because the buffer is empty.
-2. The Readers–Writers Problem
+2. __The Readers–Writers Problem__
     * Problem arises when balancing the need for simultaneous access by multiple readers against exclusive access for a single writer to ensure data consistency and integrity
     * so the problem is the reader thread is not consisten with other reader thread because one thread access it to fast and the other to slow and so on.
-3. The Dining-Philosophers Problem
+3. __The Dining-Philosophers Problem__
     * a group of philosophers sitting at a table doing one of two things - eating or thinking. While eating, they are not thinking, and while thinking, they are not eating.
     * so let say there is 2 thread that need to communicate to each other and to communicate they need a permission or flag from the other thread first.
     The problem arise when 1 thread have an error or blocking and did not send the permission or flag so deadlock happened. 
@@ -335,3 +335,12 @@ ad value: 6, UpdTted value: 7
 Multithreading allows the application to divide its task into individual threads. In multi-threads, the same process or task can be done by the number of threads, or we can say that there is more than one thread to perform the task in multithreading. With the use of multithreading, multitasking can be achieved.
 
 So Multithreading is when a program will launch more than 1 task that need to be not blocking. 
+
+__Thread model :__
+
+- Many to One
+    * the program will only spawn 1 kernel thread and spawn userspace thread whenever needed.
+- One to Many
+    * the program will create new kernel thread every time the program need a new thread.
+- Many to Many
+    * program will create as many kernel thread or userspace thread whenever the program need to.
