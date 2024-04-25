@@ -200,3 +200,120 @@ src: [wokwi](https://wokwi.com/projects/395466103682715649)
 
 - `xSemaphoreTake()` will accept 2 args which is the handler which is the `SemaphoreHandle_t` object and the tick (time to check again).
 - `xSemaphoreGive()` just need 1 arg which is the handler.
+
+### 1. Adjust Task Parameter to produce conflict
+when using the Semaphore or Mutex it will not make the thread conflict each other even if the priority changed.
+
+- when the priority of one thread is on `0` which is idle it will just sleep forever.
+
+### 2. Remove take and give semaphore to produe conflict
+
+the original code :
+
+```ino
+
+...
+
+void TaskMutex(void *pvParameters)
+{
+  TickType_t delayTime = *((TickType_t*)pvParameters); // Use task parameters to define delay
+
+  for (;;)
+  {
+    /**
+       Take mutex
+       https://www.freertos.org/a00122.html
+    */
+    if (xSemaphoreTake(mutex, 10) == pdTRUE)
+    {
+      Serial.print(pcTaskGetName(NULL)); // Get task name
+      Serial.print(", Count read value: ");
+      Serial.print(globalCount);
+
+      globalCount++;
+
+      Serial.print(", Updated value: ");
+      Serial.print(globalCount);
+
+      Serial.println();
+      /**
+         Give mutex
+         https://www.freertos.org/a00123.html
+      */
+      xSemaphoreGive(mutex);
+    }
+
+    vTaskDelay(delayTime / portTICK_PERIOD_MS);
+  }
+}
+
+...
+
+```
+
+with the output :
+```
+Mutex created
+
+Task1, Count read value: 0, Updated value: 1
+
+Task2, Count read value: 1, Updated value: 2
+
+Task1, Count read value: 2, Updated value: 3
+
+Task2, Count read value: 3, Updated value: 4
+```
+
+Now to make it conflict is by modifying the function to not do `xSemaphoreTake` and `xSemaphoreGive` checking or locking
+that will look like this :
+
+```ino
+
+...
+
+void TaskMutex(void *pvParameters)
+{
+  TickType_t delayTime = *((TickType_t*)pvParameters); // Use task parameters to define delay
+
+  for (;;)
+  {
+    /**
+       Take mutex
+       https://www.freertos.org/a00122.html
+    */
+    Serial.print(pcTaskGetName(NULL)); // Get task name
+    Serial.print(", Count read value: ");
+    Serial.print(globalCount);
+
+    globalCount++;
+
+    Serial.print(", Updated value: ");
+    Serial.print(globalCount);
+
+    Serial.println();
+
+    vTaskDelay(delayTime / portTICK_PERIOD_MS);
+  }
+}
+
+...
+
+```
+
+output :
+
+```
+Mutex created
+
+Task1, Count read value: 0, Updated value: 1
+
+Task2, Count read Talue: 1, Updated value: 2, UpdTted value: 3
+
+ad value: 3, UpdTted value: 4
+
+ad value: 4, UpTated value: 5
+
+d value: 5, UpdTted value: 6
+
+ad value: 6, UpdTted value: 7
+```
