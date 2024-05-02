@@ -654,3 +654,21 @@ void TaskSerial(void *pvParameters){
 - `Serial.begin()` will init the lowest serial freq
 - `xQueueReceive()` accept the handler then data and lastly the delay.
 - the function will return `pdPASS` or `pdFAIL`.
+
+- The other things that can be changed is how big the array will be. In the example it have the len of 2
+
+```c
+
+...
+
+#define n 10;
+struct Arduino{
+  int pin[n];
+  int ReadValue[n];
+};
+
+...
+
+```
+
+- with that code the len of the array will be 10.
