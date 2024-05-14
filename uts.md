@@ -1,6 +1,9 @@
 # StructArray
 src : [wokwi](https://wokwi.com/projects/397773181397780481) 
 
+Purpose : the purpose of this demo is so we dont need to define a lot of variable with the type struct that we need for certain function.
+Reason for os : the reason for os is so we dont need to define and create our own scheduler, thread model, mutex, etc.
+
 Example source code :
 
 ```ino
@@ -339,3 +342,15 @@ struct Arduino{
 ```
 
 - with that code the len of the array will be 10.
+
+\
+\
+
+- About `xTaskCreate(function, readable function name, stack size, args to func, priority, handler for the task)`
+    - From that example we can say that if the `xTaskCreate` priority args set to be bigger then it will have the most priority and get to run first
+    - priority is `uint8_t` with the alias of `UBaseType_t`
+    - so any unsigned integer 8 bits are possible to be an args for the `xTaskCreate` function.
+    - when the priority is `0` it will be an idle task that will be only run when idle (no other work to do).
+
+- About `vTaskDelay(how long the task will be delayed in tick)`
+    - `vTaskDelay()` specifies a time at which the task wishes to unblock relative to the time at which `vTaskDelay()` is called. For example, specifying a block period of 100 ticks will cause the task to unblock 100 ticks after `vTaskDelay()` is called.  
