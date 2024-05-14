@@ -346,7 +346,7 @@ __Thread model :__
     * program will create as many kernel thread or userspace thread whenever the program need to.
 
 ## StructArray
-src : [wokwi](https://wokwi.com/projects/new/arduino-uno) 
+src : [wokwi](https://wokwi.com/projects/397773181397780481) 
 
 Example source code :
 
@@ -480,7 +480,7 @@ void TaskSerial(void *pvParameters){
 
   // Wait for serial port to connect. Needed for native USB, on LEONARDO, MICRO, YUN, and other 32u4 based boards.
   while (!Serial) {
-    vTaskDelay(1);
+    vTaskDelay(1)
   }
   
   for (;;){
@@ -504,6 +504,10 @@ void TaskSerial(void *pvParameters){
 }
 
 ```
+
+\
+\
+\
 
 - The new data structure is defined at this line with the member `pin` and `ReadValue` as an array of integer with the size of 2.
 
@@ -544,7 +548,7 @@ structArrayQueue=xQueueCreate(10, sizeof(struct Arduino));
 
 ```
 
-- The first the function that will be launched with the thread is `TaskBlink` that accept pointer of void as the args.
+- The first function that will be launched with the thread is `TaskBlink` that accept pointer of void as the args.
 
 ```c
 
@@ -573,6 +577,9 @@ void TaskBlink(void *pvParameters){
 - `pinMode(13, OUTPUT)` make the 13th pin to be output
 - `digitalWrite(13, LOW)` will give small electricity to pin 13
 - `digitalWrite(13, LOW)` will give high electricity to pin 13
+
+\
+\
 
 - The second function that will be launched with the second task is `POT`.
 
@@ -608,8 +615,12 @@ void POT(void *pvParameters){
 ```
 
 - `xQueueSend()` will accept the handler then the data and lastly the delay.
+- The delay have a maximum amount of time the task should block waiting for space to become available on the queue, should it already be full. The call will return immediately if the queue is full and xTicksToWait is set to 0. The time is defined in tick periods so the constant portTICK_PERIOD_MS should be used to convert to real time if this is required. 
 
-- The last task that will be spawned it `TaskSerial`.
+\
+\
+
+- The last task that will be spawned is `TaskSerial`.
 
 ```c
 
@@ -654,6 +665,9 @@ void TaskSerial(void *pvParameters){
 - `Serial.begin()` will init the lowest serial freq
 - `xQueueReceive()` accept the handler then data and lastly the delay.
 - the function will return `pdPASS` or `pdFAIL`.
+
+\
+\
 
 - The other things that can be changed is how big the array will be. In the example it have the len of 2
 
