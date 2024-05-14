@@ -2,6 +2,7 @@
 src : [wokwi](https://wokwi.com/projects/397773181397780481) 
 
 Purpose : the purpose of this demo is so we dont need to define a lot of variable with the type struct that we need for certain function.
+
 Reason for os : the reason for os is so we dont need to define and create our own scheduler, thread model, mutex, etc.
 
 Example source code :
